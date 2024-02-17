@@ -3,6 +3,7 @@ package com.alexandre.oliveira.crudclients.Controllers;
 import com.alexandre.oliveira.crudclients.dto.ClientResponseDTO;
 import com.alexandre.oliveira.crudclients.dto.CreateClientDTO;
 import com.alexandre.oliveira.crudclients.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.OK).body(this.service.findById(id));
     }
     @PostMapping
-    public ResponseEntity<ClientResponseDTO> create(@RequestBody CreateClientDTO createClientDTO){
+    public ResponseEntity<ClientResponseDTO> create(@RequestBody @Valid CreateClientDTO createClientDTO){
         var clientCreated = this.service.create(createClientDTO);
         return ResponseEntity.created(
                 ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -34,7 +35,7 @@ public class ClientController {
         ).body(clientCreated);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody CreateClientDTO createClientDTO) {
+    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody @Valid CreateClientDTO createClientDTO) {
         return ResponseEntity.ok(this.service.update(id, createClientDTO));
     }
 

@@ -1,13 +1,17 @@
 package com.alexandre.oliveira.crudclients.dto;
 
 import com.alexandre.oliveira.crudclients.entities.Client;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 
 public class CreateClientDTO {
+    @NotBlank(message = "Cannot be empty")
     private String name;
     private String cpf;
     private Double income;
+    @PastOrPresent(message = "Cannot be a future date")
     private LocalDate birthDate;
     private Integer children;
 
