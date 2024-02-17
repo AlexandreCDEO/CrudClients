@@ -1,6 +1,7 @@
 package com.alexandre.oliveira.crudclients.services;
 
 import com.alexandre.oliveira.crudclients.dto.ClientResponseDTO;
+import com.alexandre.oliveira.crudclients.dto.CreateClientDTO;
 import com.alexandre.oliveira.crudclients.entities.Client;
 import com.alexandre.oliveira.crudclients.exceptions.ClientNotFoundException;
 import com.alexandre.oliveira.crudclients.repositories.ClientRepository;
@@ -29,4 +30,16 @@ public class ClientService {
                 client.getId(), client.getName(), client.getCpf(), client.getIncome(), client.getBirthDate(), client.getChildren()
         );
     }
+
+    public ClientResponseDTO create(CreateClientDTO createClientDTO){
+        var clientCreated = this.repository.save(new Client(
+                createClientDTO.getName(), createClientDTO.getCpf(), createClientDTO.getIncome(), createClientDTO.getBirthDate(), createClientDTO.getChildren()
+        ));
+
+        return new ClientResponseDTO(
+                clientCreated.getId(), clientCreated.getName(), clientCreated.getCpf(), clientCreated.getIncome(), clientCreated.getBirthDate(), clientCreated.getChildren()
+        );
+    }
+
+
 }
