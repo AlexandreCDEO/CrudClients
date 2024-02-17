@@ -32,4 +32,8 @@ public class ClientController {
                 .buildAndExpand(clientCreated.getId()).toUri();
         return ResponseEntity.created(uri).body(clientCreated);
     }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ClientResponseDTO> update(@PathVariable Long id, @RequestBody CreateClientDTO createClientDTO) {
+        return ResponseEntity.ok(this.service.update(id, createClientDTO));
+    }
 }

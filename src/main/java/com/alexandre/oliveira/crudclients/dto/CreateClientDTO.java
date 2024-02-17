@@ -1,5 +1,7 @@
 package com.alexandre.oliveira.crudclients.dto;
 
+import com.alexandre.oliveira.crudclients.entities.Client;
+
 import java.time.LocalDate;
 
 public class CreateClientDTO {
@@ -37,5 +39,11 @@ public class CreateClientDTO {
 
     public Integer getChildren() {
         return children;
+    }
+
+    public Client copyToClient(CreateClientDTO clientDTO) {
+        return new Client(
+                clientDTO.getName(), clientDTO.getCpf(), clientDTO.getIncome(), clientDTO.getBirthDate(), clientDTO.getChildren()
+        );
     }
 }

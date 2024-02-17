@@ -1,5 +1,6 @@
 package com.alexandre.oliveira.crudclients.entities;
 
+import com.alexandre.oliveira.crudclients.dto.ClientResponseDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -97,5 +98,11 @@ public class Client {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    public ClientResponseDTO copyToClientResponseDTO(Client client) {
+        return new ClientResponseDTO(
+                client.getId(), client.getName(), client.getCpf(), client.getIncome(), client.getBirthDate(), client.getChildren()
+        );
     }
 }
