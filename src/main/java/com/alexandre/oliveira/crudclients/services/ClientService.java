@@ -2,7 +2,6 @@ package com.alexandre.oliveira.crudclients.services;
 
 import com.alexandre.oliveira.crudclients.dto.ClientResponseDTO;
 import com.alexandre.oliveira.crudclients.dto.CreateClientDTO;
-import com.alexandre.oliveira.crudclients.entities.Client;
 import com.alexandre.oliveira.crudclients.exceptions.ClientNotFoundException;
 import com.alexandre.oliveira.crudclients.repositories.ClientRepository;
 import org.springframework.data.domain.Page;
@@ -45,6 +44,9 @@ public class ClientService {
         var clientUpdated = this.repository.save(client);
         return clientUpdated.copyToClientResponseDTO(clientUpdated);
     }
-
-
+    @Transactional
+    public void delete(Long id){
+        if(!this.repository.existsById(id)) throw new ClientNotFoundException("Client not found");
+        this.repository.deleteById(id);
+    }
 }
